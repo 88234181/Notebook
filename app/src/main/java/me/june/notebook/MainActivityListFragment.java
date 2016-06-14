@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -19,9 +18,7 @@ public class MainActivityListFragment extends ListFragment {
         super.onActivityCreated(savedInstanceState);
 
         String[] values = new String[] {"Android", "Iphone", "WinOS", "WebOS", "Ubuntu", "CentOS", "SUSE", "RHEL"};
-
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, values);
-
         setListAdapter(adapter);
     }
 
