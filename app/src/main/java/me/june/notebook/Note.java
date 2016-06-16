@@ -1,7 +1,7 @@
 package me.june.notebook;
 
 /**
- * Created by Administrator on 2016/6/14.
+ * Created by Junjie Zhao on 2016/6/14.
  */
 public class Note {
     private String title;
@@ -27,6 +27,10 @@ public class Note {
 
     public Category getCategory(){
         return category;
+    }
+
+    public String getMessage(){
+        return message;
     }
 
     public long getDate(){

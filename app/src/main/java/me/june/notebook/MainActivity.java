@@ -1,15 +1,17 @@
 package me.june.notebook;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String NOTE_ID_EXTRA = "me.june.notebook.Note Identifier";
+    public static final String NOTE_TITLE_EXTRA = "me.june.notebook.Note Title";
+    public static final String NOTE_MESSAGE_EXTRA = "me.june.notebook.Note Message";
+    public static final String NOTE_CATEGORY_EXTRA = "me.june.notebook.Note Category";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
