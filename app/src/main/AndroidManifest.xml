@@ -18,7 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".NoteDetailActivity"></activity>
+        <activity
+            android:name=".NoteDetailActivity"
+            android:parentActivityName=".MainActivity"
+            android:label="@string/editFragmentTitle">
+
+        </activity>
     </application>
 
 </manifest>

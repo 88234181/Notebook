@@ -5,7 +5,12 @@ import android.app.ListFragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
+import android.view.ContextMenu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import java.util.ArrayList;
 
@@ -45,6 +50,8 @@ public class MainActivityListFragment extends ListFragment {
 
         //getListView().setDivider(ContextCompat.getDrawable(getActivity(), android.R.color.black));
         //getListView().setDividerHeight(1);
+
+        registerForContextMenu(getListView());
     }
 
     @Override
@@ -52,6 +59,31 @@ public class MainActivityListFragment extends ListFragment {
         super.onListItemClick(l, v, position, id);
 
         launchNoteDetailActivity(position);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo){
+        super.onCreateContextMenu(menu, v, menuInfo);
+
+        MenuInflater menuInflater = getActivity().getMenuInflater();
+        menuInflater.inflate(R.menu.long_press_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        int rowPosition = info.position;
+
+        //return to us id of whatever menu item we selected
+        switch(item.getItemId()){
+            //if we press edit
+            case R.id.edit:
+                launchNoteDetailActivity(rowPosition);
+                Log.d("menu clicks", "we press edit");
+                return true;
+        }
+
+        return super.onContextItemSelected(item);
     }
 
     private void launchNoteDetailActivity(int position){
