@@ -21,7 +21,7 @@
         <activity
             android:name=".NoteDetailActivity"
             android:parentActivityName=".MainActivity"
-            android:label="@string/editFragmentTitle">
+            android:label="@string/edit_Fragment_Title">
 
         </activity>
     </application>
