@@ -58,7 +58,7 @@ public class MainActivityListFragment extends ListFragment {
     public void onListItemClick(ListView l, View v, int position, long id){
         super.onListItemClick(l, v, position, id);
 
-        launchNoteDetailActivity(position);
+        launchNoteDetailActivity(MainActivity.FragmentToLaunch.VIEW, position);
     }
 
     @Override
@@ -71,6 +71,7 @@ public class MainActivityListFragment extends ListFragment {
 
     @Override
     public boolean onContextItemSelected(MenuItem item) {
+        //give me the position of whatever note i long pressed on
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int rowPosition = info.position;
 
@@ -78,7 +79,7 @@ public class MainActivityListFragment extends ListFragment {
         switch(item.getItemId()){
             //if we press edit
             case R.id.edit:
-                launchNoteDetailActivity(rowPosition);
+                launchNoteDetailActivity(MainActivity.FragmentToLaunch.EDIT, rowPosition);
                 Log.d("menu clicks", "we press edit");
                 return true;
         }
@@ -86,7 +87,7 @@ public class MainActivityListFragment extends ListFragment {
         return super.onContextItemSelected(item);
     }
 
-    private void launchNoteDetailActivity(int position){
+    private void launchNoteDetailActivity(MainActivity.FragmentToLaunch ftl,int position){
 
         //grab the note information associated with whatever note item we clicked on
         Note note = (Note) getListAdapter().getItem(position);
@@ -100,6 +101,14 @@ public class MainActivityListFragment extends ListFragment {
         intent.putExtra(MainActivity.NOTE_CATEGORY_EXTRA, note.getCategory());
         intent.putExtra(MainActivity.NOTE_ID_EXTRA, note.getId());
 
+        switch(ftl){
+            case VIEW:
+                intent.putExtra(MainActivity.NOTE_FRAGMENT_TO_LOAD_EXTRAS, MainActivity.FragmentToLaunch.VIEW);
+                break;
+            case EDIT:
+                intent.putExtra(MainActivity.NOTE_FRAGMENT_TO_LOAD_EXTRAS, MainActivity.FragmentToLaunch.EDIT);
+                break;
+        }
         startActivity(intent);
     }
 }

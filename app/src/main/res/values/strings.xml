@@ -3,8 +3,8 @@
     <string name="action_settings">Settings</string>
 
     <!--Fragment Title String -->
-    <string name="viewFragmentTitle">View Note</string>
-    <string name="editFragmentTitle">Edit Note</string>
+    <string name="view_Fragment_Title">View Note</string>
+    <string name="edit_Fragment_Title">Edit Note</string>
 
     <!-- Main List Long Click Context Menu -->
     <string name="edit_menu">Edit</string>

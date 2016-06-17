@@ -1,5 +1,6 @@
 package me.june.notebook;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
@@ -15,13 +16,31 @@ public class NoteDetailActivity extends AppCompatActivity {
     }
 
     private void createAndAddFragment(){
+
+        //brag intent and fragment to laucnh from our main activity list fragment
+        Intent intent = getIntent();
+        MainActivity.FragmentToLaunch fragmentToLaunch = (MainActivity.FragmentToLaunch) intent.getSerializableExtra(MainActivity.NOTE_FRAGMENT_TO_LOAD_EXTRAS);
+
+        //grabbing our fragment manager and our fragment transaction so that we can add our edit or view fragment dynamically
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        NoteViewFragment noteViewFragment = new NoteViewFragment();
-        setTitle(R.string.viewFragmentTitle);
-        fragmentTransaction.add(R.id.note_container, noteViewFragment, "NOTE_VIEW_FRAGMENT");
+        switch (fragmentToLaunch){
+            case EDIT:
+                //create and add note edit fragment to note detail activity if that is what we want to launch
+                NoteEditFragment noteEditFragment = new NoteEditFragment();
+                setTitle(R.string.edit_Fragment_Title);
+                fragmentTransaction.add(R.id.note_container, noteEditFragment, "NOTE_EDIT_FRAGMENT");
+                break;
+            case VIEW:
+                //create and add note view fragment to note detail activity if that is what we want to launch
+                NoteViewFragment noteViewFragment = new NoteViewFragment();
+                setTitle(R.string.view_Fragment_Title);
+                fragmentTransaction.add(R.id.note_container, noteViewFragment, "NOTE_VIEW_FRAGMENT");
+                break;
+        }
 
+        //commit our changes so that everything works
         fragmentTransaction.commit();
     }
 }
