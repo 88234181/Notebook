@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
@@ -41,6 +42,7 @@ public class NoteEditFragment extends Fragment {
         title = (EditText) fragmentLayout.findViewById(R.id.editNoteTitle);
         message = (EditText) fragmentLayout.findViewById(R.id.editNoteMessage);
         noteCatButton = (ImageButton) fragmentLayout.findViewById(R.id.editNoteButton);
+        Button savedButton = (Button) fragmentLayout.findViewById(R.id.saveNote);
 
         //populate widgets with note data
         Intent intent = getActivity().getIntent();
@@ -52,11 +54,18 @@ public class NoteEditFragment extends Fragment {
         buildCategoryDialog();
         buildConfirmDialog();
 
-        //create an onclick listener to show the dialog
+        //create an onclick listener to show the note type changing dialog
         noteCatButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 categoryDialogObject.show();
+            }
+        });
+
+        savedButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                confirmDialogObject.show();
             }
         });
 
