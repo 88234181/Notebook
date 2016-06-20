@@ -32,14 +32,10 @@ public class MainActivityListFragment extends ListFragment {
         setListAdapter(adapter);
         */
 
-        notes = new ArrayList<>();
-        notes.add(new Note("This is a new note title!", "This is a note body", Note.Category.PERSONAL, 1, 1));
-        notes.add(new Note("This is another note title!", "I am think of what to put in here", Note.Category.FINANCE, 2, 1));
-        notes.add(new Note("This is getting bored!", "I am going to do copy and paste", Note.Category.FINANCE, 3, 1));
-        notes.add(new Note("For some reasons I have to put the category", "let me try other category", Note.Category.TECHNICAL, 4, 1));
-        notes.add(new Note("Not sure i have enough notes", "let me generate some more", Note.Category.QUOTE, 5, 1));
-        notes.add(new Note("i am getting tired of this", "even though I am pasting everything", Note.Category.QUOTE, 6, 1));
-        notes.add(new Note("OK! Enough!", "this will be the last one", Note.Category.QUOTE, 7, 1));
+        NotebookDbAdapter notebookDbAdapter = new NotebookDbAdapter(getActivity().getBaseContext());
+        notebookDbAdapter.open();
+        notes = notebookDbAdapter.getAllNotes();
+        notebookDbAdapter.close();
 
         /**
          * need to add a layout profile for this 'android.R.layout.simple_list_item_1'

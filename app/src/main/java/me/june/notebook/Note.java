@@ -13,6 +13,14 @@ public class Note {
 
     public enum Category{PERSONAL, TECHNICAL, QUOTE, FINANCE}
 
+    public Note(String title, String message, Category category){
+        this.title = title;
+        this.message = message;
+        this.noteId = 0;
+        this.category = category;
+        this.dateCreatedMilli = 0;
+    }
+
     public Note(String title, String message, Category category, long noteId, long dateCreatedMilli){
         this.title = title;
         this.message = message;

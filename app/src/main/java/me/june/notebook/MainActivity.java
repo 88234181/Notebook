@@ -1,5 +1,6 @@
 package me.june.notebook;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -13,7 +14,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String NOTE_MESSAGE_EXTRA = "me.june.notebook.Message";
     public static final String NOTE_CATEGORY_EXTRA = "me.june.notebook.Category";
     public static final String NOTE_FRAGMENT_TO_LOAD_EXTRAS = "me.june.notebook.Fragment_To_Load";
-    public enum FragmentToLaunch { VIEW, EDIT }
+    public enum FragmentToLaunch { VIEW, EDIT, CREATE }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +41,11 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            return true;
+        }else if(id == R.id.action_add_note){
+            Intent intent = new Intent(this, NoteDetailActivity.class);
+            intent.putExtra(NOTE_FRAGMENT_TO_LOAD_EXTRAS, FragmentToLaunch.CREATE);
+            startActivity(intent);
             return true;
         }
 
