@@ -108,6 +108,9 @@ public class NotebookDbAdapter {
             //destroys data
             db.execSQL("DROP TABLE IF EXISTS " + NOTE_TABLE);
             onCreate(db);
+
         }
     }
 }
+
+
