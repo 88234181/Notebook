@@ -91,6 +91,16 @@ public class NotebookDbAdapter {
         return newNote;
     }
 
+    public long updateNote(long idToUpdate, String newTitle, String newMessage, Note.Category newCategory){
+        ContentValues values = new ContentValues();
+        values.put(COLUMN_TITLE, newTitle);
+        values.put(COLUMN_MESSAGE, newMessage);
+        values.put(COLUMN_CATEGORY, newCategory.name());
+        values.put(COLUMN_DATE, Calendar.getInstance().getTimeInMillis() + "");
+
+        return sqlDb.update(NOTE_TABLE, values, COLUMN_ID + " = " + idToUpdate, null); //should return 1 since only 1 row will be updated
+    }
+
     private static class NotebookDbHelper extends SQLiteOpenHelper{
 
         NotebookDbHelper(Context ctx){

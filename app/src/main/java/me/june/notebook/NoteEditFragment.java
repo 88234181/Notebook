@@ -26,6 +26,7 @@ public class NoteEditFragment extends Fragment {
     private Note.Category savedButtonCategory;
     private AlertDialog categoryDialogObject;
     private AlertDialog confirmDialogObject;
+    private long noteId = 0;
 
     private static final String MODIFIED_CATEGORY = "Modified Category";
     private boolean newNote = false;
@@ -62,6 +63,7 @@ public class NoteEditFragment extends Fragment {
         Intent intent = getActivity().getIntent();
         title.setText(intent.getExtras().getString(MainActivity.NOTE_TITLE_EXTRA, ""));
         message.setText(intent.getExtras().getString(MainActivity.NOTE_MESSAGE_EXTRA, ""));
+        noteId = intent.getExtras().getLong(MainActivity.NOTE_ID_EXTRA, 0);
 
         //if we grabbed a category from our bundle that we know we changed orientation and saved information so set our image button background to that category
         if(savedInstanceState != null){
@@ -157,8 +159,11 @@ public class NoteEditFragment extends Fragment {
                 }
                 //otherwise it is and old note so update it in our database
                 else{
-
+                    dbAdapter.updateNote(noteId, title.getText()+"", message.getText()+"", savedButtonCategory);
                 }
+
+                dbAdapter.close();
+
                 Intent intent = new Intent(getActivity(), MainActivity.class);
                 startActivity(intent);
             }
