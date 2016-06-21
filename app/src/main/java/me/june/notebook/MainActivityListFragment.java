@@ -71,6 +71,8 @@ public class MainActivityListFragment extends ListFragment {
         AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
         int rowPosition = info.position;
 
+        Note note = (Note) getListAdapter().getItem(rowPosition);
+
         //return to us id of whatever menu item we selected
         switch(item.getItemId()){
             //if we press edit
@@ -78,6 +80,14 @@ public class MainActivityListFragment extends ListFragment {
                 launchNoteDetailActivity(MainActivity.FragmentToLaunch.EDIT, rowPosition);
                 Log.d("menu clicks", "we press edit");
                 return true;
+            case R.id.delete:
+                NotebookDbAdapter dbAdapter = new NotebookDbAdapter(getActivity().getBaseContext());
+                dbAdapter.open();
+                dbAdapter.deleteNote(note.getId());
+                notes.remove(rowPosition);
+                //notes.addAll(dbAdapter.getAllNotes());
+                noteAdapter.notifyDataSetChanged();
+                dbAdapter.close();
         }
 
         return super.onContextItemSelected(item);

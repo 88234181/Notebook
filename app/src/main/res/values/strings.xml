@@ -12,6 +12,7 @@
 
     <!-- Main List Long Click Context Menu -->
     <string name="edit_menu">Edit</string>
+    <string name="delete_menu">Delete</string>
 
     <!-- edit note view save button -->
     <string name="save_note_button">SAVE NOTE</string>
